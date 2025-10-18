@@ -1,0 +1,12 @@
+{
+  "exclude": [ ".venv" ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "typeCheckingMode": "strict",
+  "reportMissingImports": true,
+  "reportMissingModuleSource": true,
+  "reportGeneralTypeIssues": true,
+  "reportOptionalMemberAccess": true,
+  "reportAttributeAccessIssue": "error",
+  "reportUnknownMemberType": "warning"
+}
