@@ -1,0 +1,129 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Address <<Serial>> {
+    -street : string
+    -city : string
+    -zipCode : string
+}
+
+abstract class Person {
+    #id : int {unique}
+    #name : string {required, min=2, max=50}
+    #email : string
+    #address : Address
+    #contactMethods : Array<string, string>
+    --
+    +getId() : int
+    +getName() : string
+    +getEmail() : string
+    +setEmail(email : string) : void
+    #validateName() : boolean
+}
+
+class Customer {
+    -driverLicenseNumber : string {unique, required, min=5, max=15}
+    -rentalHistory : List<RentalContract>
+    -licenseScan : BinaryStream
+    --
+    +getDriverLicenseNumber() : string
+    +getRentalHistory() : List<RentalContract>
+    +addRental(contract : RentalContract) : void
+    +uploadLicenseScan(scan : BinaryStream) : void
+    +requestRental(car : Car, startDate : Date, endDate : Date) : RentalContract
+}
+
+class Employee {
+    -employeeId : string {unique}
+    -position : string
+    -hireDate : Date
+    --
+    +getEmployeeId() : string
+    +getPosition() : string
+    +createCar(vin : string, plate : string, model : CarModel, rate : BigDecimal) : Car
+    +inspectCar(car : Car) : boolean
+}
+
+class CarModel {
+    -modelId : int {unique}
+    -brand : string
+    -modelName : string
+    -year : int {min=2000, max=2025}
+    -features : Array<string>
+    --
+    +getModelId() : int
+    +getBrand() : string
+    +getModelName() : string
+    +getYear() : int
+    +getFeatures() : Array<string>
+    +addFeature(f : string) : void
+    +removeFeature(f : string) : void
+}
+
+class Car {
+    -vin : string {unique, required}
+    -licensePlate : string {unique}
+    -status : string
+    -mileage : int {min=0, max=500000}
+    -dailyRate : BigDecimal {min=10.0, max=500.0}
+    -photo : BinaryStream
+    -model : CarModel
+    --
+    +getVin() : string
+    +getLicensePlate() : string
+    +getStatus() : string
+    +setStatus(s : string) : void
+    +getMileage() : int
+    +updateMileage(m : int) : void
+    +getDailyRate() : BigDecimal
+    +isAvailable(startDate : Date, endDate : Date) : boolean
+    +attachPhoto(photo : BinaryStream) : void
+}
+
+class RentalContract {
+    -contractId : int {unique}
+    -startDate : Date {required}
+    -endDate : Date {required}
+    -agreementText : CharacterStream
+    -car : Car
+    -customer : Customer
+    -payments : List<Payment>
+    -closed : boolean
+    --
+    +getContractId() : int
+    +getPeriod() : String
+    +getCar() : Car
+    +getCustomer() : Customer
+    +addPayment(p : Payment) : void
+    +calculateTotal() : BigDecimal
+    +closeContract() : void
+    +isActive() : boolean
+}
+
+class Payment {
+    -paymentId : int {unique}
+    -amount : BigDecimal {min=0.0, required}
+    -date : Date
+    -method : string
+    -processed : boolean
+    --
+    +getAmount() : BigDecimal
+    +process() : boolean
+    +refund() : boolean
+}
+
+Person *-- Address
+
+Person <|-- Customer
+Person <|-- Employee
+
+CarModel "1" o-- "1..*" Car
+
+Customer "1" o-- "1..*" RentalContract
+Car "1" o-- "0..*" RentalContract
+
+RentalContract *-- Payment
+
+Employee --> Car
+
+@enduml
