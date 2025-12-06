@@ -1,0 +1,7 @@
+venv
+target
+dependency-reduced-pom.xml
+.settings
+.classpath
+.factorypath
+.project

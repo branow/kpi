@@ -1,0 +1,7 @@
+
+exactly once
+[Ingestion] Processed 10000 records. Last batch: 2212.39 records/sec
+
+
+at least once
+[Ingestion] Processed 10000 records. Last batch: 2114.16 records/se
