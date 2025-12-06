@@ -1,0 +1,32 @@
+~/proj/kpi/d/lab3 main !1 ?6 ❯ python3 generator.py                                       lab3 12:23:35
+[info] Generating ~1,036,800 rows across 4 devices...
+[info] Schema=hourly, batch_size=50, workers=8
+[done] device=reactor_3, inserted=259200
+[done] device=reactor_4, inserted=259200
+[done] device=reactor_2, inserted=259200
+[done] device=reactor_1, inserted=259200
+
+Inserted total 1,036,800 rows in 313.8s (3304.2 rows/sec)
+~/proj/kpi/d/lab3 main !1 ?6 ❯ 
+
+~/projects/kpi/distributed-db/lab3 main !1 ?6 ❯ python3 generator.py --schema=simple                                                                                                                                           lab3 13:29:00
+[info] Generating ~1,036,800 rows across 4 devices...
+[info] Schema=simple, batch_size=50, workers=8
+[done] device=reactor_2, inserted=259200
+[done] device=reactor_4, inserted=259200
+[done] device=reactor_3, inserted=259200
+[done] device=reactor_1, inserted=259200
+
+Inserted total 1,036,800 rows in 307.4s (3373.3 rows/sec)
+~/projects/kpi/distributed-db/lab3 main !1 ?6 ❯         
+
+~/projects/kpi/distributed-db/lab3 main !1 ?6 ❯ python3 generator.py --schema=daily                                                                                            lab3 13:58:25
+[info] Generating ~1,036,800 rows across 4 devices...
+[info] Schema=daily, batch_size=50, workers=8
+[done] device=reactor_2, inserted=259200
+[done] device=reactor_4, inserted=259200
+[done] device=reactor_1, inserted=259200
+[done] device=reactor_3, inserted=259200
+
+Inserted total 1,036,800 rows in 318.1s (3259.2 rows/sec)
+~/projects/kpi/distributed-db/lab3 main !1 ?6 ❯   

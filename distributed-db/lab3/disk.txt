@@ -1,0 +1,11 @@
+root@8ff93555beb7:/# du -sh /var/lib/cassandra/data/npp_lab3/*
+55M     /var/lib/cassandra/data/npp_lab3/telemetry_daily-9aa555eabd5211f0bb734935f39ed262
+0       /var/lib/cassandra/data/npp_lab3/telemetry_daily_agg-9adf51a0bd5211f0bb734935f39ed262
+35M     /var/lib/cassandra/data/npp_lab3/telemetry_daily_mv_power-8c7282b0bd5511f0ae5ba79151cbd01f
+38M     /var/lib/cassandra/data/npp_lab3/telemetry_hourly-9a695e50bd5211f0bb734935f39ed262
+38M     /var/lib/cassandra/data/npp_lab3/telemetry_hourly_mv_power-8c2d1540bd5511f0ae5ba79151cbd01f
+38M     /var/lib/cassandra/data/npp_lab3/telemetry_simple-9a3a5f10bd5211f0bb734935f39ed262
+40M     /var/lib/cassandra/data/npp_lab3/telemetry_simple_mv_power-8b9f5430bd5511f0ae5ba79151cbd01f
+root@8ff93555beb7:/# 
+
+242M	/var/lib/cassandra/data/npp_lab3/
