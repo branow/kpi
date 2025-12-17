@@ -1,0 +1,128 @@
+<csp:content charset="utf-8">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Car</title>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f9f9f9; }
+        form { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); max-width: 500px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .row { display: flex; gap: 10px; }
+        .col { flex: 1; }
+        .actions { margin-top: 25px; }
+        input[type="submit"] { background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        input[type="submit"]:hover { background-color: #218838; }
+        .cancel-link { margin-left: 15px; text-decoration: none; color: #6c757d; }
+    </style>
+</head>
+<body>
+
+<script language="Cache" runat="server">
+    Set id = %request.Get("id")
+    Set vin="", plate="", rate="", status="Available"
+    Set brandVal="", modelVal=""
+    
+    If (id'="") {
+        Set car = ##class(Lab7.Car).%OpenId(id)
+        If $IsObject(car) {
+            Set vin = car.Vin
+            Set plate = car.LicensePlate
+            Set rate = car.DailyRate
+            Set status = car.Status
+            
+            If $IsObject(car.Model) {
+                Set brandVal = car.Model.Brand
+                Set modelVal = car.Model.ModelName
+            }
+        }
+    }
+    
+    If (%request.Get("btnSave")'="") {
+        Set vin = %request.Get("Vin")
+        Set plate = %request.Get("LicensePlate")
+        Set rate = %request.Get("DailyRate")
+        Set status = %request.Get("Status")
+        
+        Set inBrand = %request.Get("Brand")
+        Set inModel = %request.Get("ModelName")
+        
+        TSTART
+        
+        Try {
+            Set modelObj = ""
+            
+            &sql(SELECT ID INTO :foundId FROM Lab7.CarModel WHERE Brand = :inBrand AND ModelName = :inModel)
+            
+            If (SQLCODE = 0) {
+                Set modelObj = ##class(Lab7.CarModel).%OpenId(foundId)
+            } Else {
+                Set modelObj = ##class(Lab7.CarModel).%New()
+                Set modelObj.Brand = inBrand
+                Set modelObj.ModelName = inModel
+                Do modelObj.%Save()
+            }
+            
+            If (id="") { Set car = ##class(Lab7.Car).%New() } 
+            Else { Set car = ##class(Lab7.Car).%OpenId(id) }
+            
+            Set car.Vin = vin
+            Set car.LicensePlate = plate
+            Set car.DailyRate = rate
+            Set car.Status = status
+            Set car.Model = modelObj
+            
+            $$$ThrowOnError(car.%Save())
+            
+            TCOMMIT
+            
+            Write "<script type='text/javascript'>", !
+            Write "alert('Saved successfully!');", !
+            Write "window.location.href = 'CarList.csp';", !
+            Write "</"_"script>", ! 
+            
+        } Catch ex {
+            TROLLBACK
+            Set error = ex.DisplayString()
+            &html<<div style="color:red; margin-bottom:15px;">Error: #(error)#</div>>
+        }
+    }
+</script>
+
+    <h1>#( $Select(id="":"New Car", 1:"Edit Car #"_id) )#</h1>
+
+    <form method="post">
+        <label>VIN Code:</label>
+        <input type="text" name="Vin" value="#(vin)#" required placeholder="Enter VIN...">
+        
+        <div class="row">
+            <div class="col">
+                <label>Car Brand:</label>
+                <input type="text" name="Brand" value="#(brandVal)#" required placeholder="e.g. Toyota">
+            </div>
+            <div class="col">
+                <label>Model Name:</label>
+                <input type="text" name="ModelName" value="#(modelVal)#" required placeholder="e.g. Camry">
+            </div>
+        </div>
+        
+        <label>License Plate:</label>
+        <input type="text" name="LicensePlate" value="#(plate)#" placeholder="AA1234BB">
+        
+        <label>Daily Rate ($):</label>
+        <input type="number" name="DailyRate" value="#(rate)#" placeholder="e.g. 50">
+        
+        <label>Status:</label>
+        <select name="Status">
+            <option value="Available" #( $Select(status="Available":"selected",1:"") )#>Available</option>
+            <option value="Rented" #( $Select(status="Rented":"selected",1:"") )#>Rented</option>
+            <option value="Maintenance" #( $Select(status="Maintenance":"selected",1:"") )#>Maintenance</option>
+        </select>
+        
+        <div class="actions">
+            <input type="submit" name="btnSave" value="Save Car">
+            <a href="CarList.csp" class="cancel-link">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "a9007c24-f61a-4106-aebb-f9b2ad597578",
+		"name": "CarRentSOAP",
+		"description": "\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33029606",
+		"_collection_link": "https://www.postman.com/karkuhkarkuh13-9496604/rest/collection/q72e1u2/carrentsoap?action=share&source=collection_link&creator=33029606"
+	},
+	"item": [
+		{
+			"name": "CreateCar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://Lab7.org/Lab7.SOAP.CarService.CreateCar"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:CreateCar xmlns:s0=\"http://Lab7.org\">\n      <s0:Vin>string</s0:Vin>\n      <s0:LicensePlate>string</s0:LicensePlate>\n      <s0:Rate>34</s0:Rate>\n      <s0:Brand>string</s0:Brand>\n      <s0:ModelName>string</s0:ModelName>\n      <s0:Status>string</s0:Status>\n    </s0:CreateCar>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{CarRentSOAPSoapBaseUrl}}/csp/user/Lab7.SOAP.CarService.cls",
+					"host": [
+						"{{CarRentSOAPSoapBaseUrl}}"
+					],
+					"path": [
+						"csp",
+						"user",
+						"Lab7.SOAP.CarService.cls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "CreateCar response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://Lab7.org/Lab7.SOAP.CarService.CreateCar"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:CreateCar xmlns:s0=\"http://Lab7.org\">\n      <s0:Vin>string</s0:Vin>\n      <s0:LicensePlate>string</s0:LicensePlate>\n      <s0:Rate>34</s0:Rate>\n      <s0:Brand>string</s0:Brand>\n      <s0:ModelName>string</s0:ModelName>\n      <s0:Status>string</s0:Status>\n    </s0:CreateCar>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9092/csp/user/Lab7.SOAP.CarService.cls",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9092",
+							"path": [
+								"csp",
+								"user",
+								"Lab7.SOAP.CarService.cls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:CreateCarResponse xmlns:s0=\"http://Lab7.org\">\n      <s0:CreateCarResult>string</s0:CreateCarResult>\n    </s0:CreateCarResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "DeleteCar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://Lab7.org/Lab7.SOAP.CarService.DeleteCar"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:DeleteCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>12</s0:id>\n    </s0:DeleteCar>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{CarRentSOAPSoapBaseUrl}}/csp/user/Lab7.SOAP.CarService.cls",
+					"host": [
+						"{{CarRentSOAPSoapBaseUrl}}"
+					],
+					"path": [
+						"csp",
+						"user",
+						"Lab7.SOAP.CarService.cls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DeleteCar response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://Lab7.org/Lab7.SOAP.CarService.DeleteCar"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:DeleteCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>string</s0:id>\n    </s0:DeleteCar>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9092/csp/user/Lab7.SOAP.CarService.cls",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9092",
+							"path": [
+								"csp",
+								"user",
+								"Lab7.SOAP.CarService.cls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:DeleteCarResponse xmlns:s0=\"http://Lab7.org\">\n      <s0:DeleteCarResult>string</s0:DeleteCarResult>\n    </s0:DeleteCarResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "GetCar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://Lab7.org/Lab7.SOAP.CarService.GetCar"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:GetCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>1</s0:id>\n    </s0:GetCar>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{CarRentSOAPSoapBaseUrl}}/csp/user/Lab7.SOAP.CarService.cls",
+					"host": [
+						"{{CarRentSOAPSoapBaseUrl}}"
+					],
+					"path": [
+						"csp",
+						"user",
+						"Lab7.SOAP.CarService.cls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetCar response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://Lab7.org/Lab7.SOAP.CarService.GetCar"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:GetCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>string</s0:id>\n    </s0:GetCar>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9092/csp/user/Lab7.SOAP.CarService.cls",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9092",
+							"path": [
+								"csp",
+								"user",
+								"Lab7.SOAP.CarService.cls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:GetCarResponse xmlns:s0=\"http://Lab7.org\">\n      <s0:GetCarResult>\n        <s0:Vin>string</s0:Vin>\n        <s0:LicensePlate>string</s0:LicensePlate>\n        <s0:Status>string</s0:Status>\n        <s0:Mileage>100</s0:Mileage>\n        <s0:DailyRate>100</s0:DailyRate>\n        <s0:Photo>Y29udGVudA==</s0:Photo>\n        <s0:Model>\n          <s0:Brand>string</s0:Brand>\n          <s0:ModelName>string</s0:ModelName>\n          <s0:Year>2000</s0:Year>\n          <s0:Features/>\n        </s0:Model>\n      </s0:GetCarResult>\n    </s0:GetCarResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "UpdateCar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://Lab7.org/Lab7.SOAP.CarService.UpdateCar"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:UpdateCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>12</s0:id>\n      <s0:Rate>31</s0:Rate>\n      <s0:Status>string</s0:Status>\n    </s0:UpdateCar>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{CarRentSOAPSoapBaseUrl}}/csp/user/Lab7.SOAP.CarService.cls",
+					"host": [
+						"{{CarRentSOAPSoapBaseUrl}}"
+					],
+					"path": [
+						"csp",
+						"user",
+						"Lab7.SOAP.CarService.cls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "UpdateCar response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://Lab7.org/Lab7.SOAP.CarService.UpdateCar"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:UpdateCar xmlns:s0=\"http://Lab7.org\">\n      <s0:id>string</s0:id>\n      <s0:Rate>31</s0:Rate>\n      <s0:Status>string</s0:Status>\n    </s0:UpdateCar>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9092/csp/user/Lab7.SOAP.CarService.cls",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9092",
+							"path": [
+								"csp",
+								"user",
+								"Lab7.SOAP.CarService.cls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <s0:UpdateCarResponse xmlns:s0=\"http://Lab7.org\">\n      <s0:UpdateCarResult>string</s0:UpdateCarResult>\n    </s0:UpdateCarResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "CarRentSOAPSoapBaseUrl",
+			"value": "http://localhost:9092",
+			"type": "any"
+		}
+	]
+}

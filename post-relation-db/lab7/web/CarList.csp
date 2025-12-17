@@ -1,0 +1,84 @@
+<csp:content charset="utf-8">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Car List</title>
+    <style>
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+        .btn { padding: 8px 15px; text-decoration: none; color: white; border-radius: 4px; font-size: 14px; margin-right: 5px; }
+        .btn-add { background-color: #28a745; display: inline-block; margin-bottom: 15px; }
+        .btn-edit { background-color: #ffc107; color: black; }
+        .btn-delete { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <h1>Car Management (Sorted by ID)</h1>
+    
+    <a href="CarEdit.csp" class="btn btn-add">+ Add New Car</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>VIN</th>
+            <th>License Plate</th>
+            <th>Brand & Model</th>
+            <th>Daily Rate</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        <script language="Cache" runat="server">
+            Set tStatement = ##class(%SQL.Statement).%New()
+            
+            Set sql = "SELECT %ID, Vin, LicensePlate, Model->Brand, Model->ModelName, DailyRate, Status FROM Lab7.Car ORDER BY %ID ASC"
+            
+            Set tStatus = tStatement.%Prepare(sql)
+            Set rset = tStatement.%Execute()
+            
+            While rset.%Next() {
+                Set id = rset.%Get("ID")
+                Set vin = rset.%Get("Vin")
+                Set plate = rset.%Get("LicensePlate")
+                Set brand = rset.%Get("Brand")
+                Set model = rset.%Get("ModelName")
+                Set rate = rset.%Get("DailyRate")
+                Set status = rset.%Get("Status")
+                
+                &html<
+                    <tr>
+                        <td>#(id)#</td>
+                        <td>#(vin)#</td>
+                        <td>#(plate)#</td>
+                        <td>#(brand)# #(model)#</td>
+                        <td>$#(rate)#</td>
+                        <td>#(status)#</td>
+                        <td>
+                            <a href="CarEdit.csp?id=#(id)#" class="btn btn-edit">Edit</a>
+                            <a href="CarList.csp?deleteId=#(id)#" class="btn btn-delete" onclick="return confirm('Delete car # #(id)#?')">Delete</a>
+                        </td>
+                    </tr>
+                >
+            }
+        </script>
+    </table>
+    
+    <script language="Cache" runat="server">
+        Set delId = %request.Get("deleteId")
+        If (delId'="") {
+            Do ##class(Lab7.Car).%DeleteId(delId)
+            
+            Write "<script type='text/javascript'>", !
+            Write "window.location.href = 'CarList.csp';", !
+            Write "</"_"script>", ! 
+        }
+    </script>
+
+</body>
+</html>
