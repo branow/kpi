@@ -5,7 +5,7 @@ Property DriverLicenseNumber As %String(MAXLEN = 15, MINLEN = 5) [ Required ];
 
 Index DlnIndex On DriverLicenseNumber [ Unique ];
 
-Property RentalHistory As list Of Lab4.RentalContract;
+Relationship RentalHistory As Lab4.RentalContract [ Cardinality = many, Inverse = Customer ];
 
 Property LicenseScan As %Stream.GlobalBinary;
 

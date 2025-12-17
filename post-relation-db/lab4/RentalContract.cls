@@ -13,7 +13,7 @@ Property AgreementText As %Stream.GlobalCharacter;
 
 Property Car As Lab4.Car;
 
-Property Customer As Lab4.Customer;
+Relationship Customer As Lab4.Customer [ Cardinality = one, Inverse = RentalHistory ];
 
 Relationship Payments As Lab4.Payment [ Cardinality = children, Inverse = RentalContract ];
 
