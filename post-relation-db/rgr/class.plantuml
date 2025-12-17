@@ -1,0 +1,101 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class "Address" <<Serial>> {
+    Street : %String
+    City : %String
+    ZipCode : %String
+}
+
+abstract class "Person" {
+    Name : %String {required, min=2, max=50}
+    Email : %String
+    Address : Lab7.Address
+    ContactMethods : array<string>
+    --
+    ValidateName() : %Boolean
+    OnPopulate() : %Status
+}
+
+class "Customer" {
+    DriverLicenseNumber : %String {required, unique, min=5, max=15}
+    LicenseScan : %Stream.GlobalBinary
+    --
+    AddRental(contract : RentalContract)
+    RequestRental(car : Car, startDate : %Date, endDate : %Date) : RentalContract
+}
+
+class "Employee" {
+    Position : %String
+    HireDate : %Date
+    --
+    CreateCar(vin, plate, model, rate) : Car
+    InspectCar(car : Car) : %Boolean
+    FindEmployeesDynamic(namePart : %String)
+}
+
+class "CarModel" {
+    Brand : %String
+    ModelName : %String
+    Year : %Integer {2000..2025}
+    Features : list<string>
+    --
+    AddFeature(f : %String)
+    RemoveFeature(f : %String)
+    OnPopulate() : %Status
+    FindByYearRange()
+}
+
+class "Car" {
+    Vin : %String {required, unique}
+    LicensePlate : %String {unique}
+    Status : %String
+    Mileage : %Integer {0..500000}
+    DailyRate : %Decimal {10..500}
+    Photo : %Stream.GlobalBinary
+    Model : CarModel
+    --
+    IsAvailable(startDate : %Date, endDate : %Date) : %Boolean
+}
+
+class "RentalContract" {
+    StartDate : %Date {required}
+    EndDate : %Date {required}
+    AgreementText : %Stream.GlobalCharacter
+    Closed : %Boolean
+    RentalDays : %Integer {calculated}
+    TotalPayment : %Decimal {calculated}
+    --
+    AddPayment(p : Payment)
+    TotalPaymentGet() : %Decimal
+    RentalDaysGet() : %Integer
+    CloseContract()
+    IsActive() : %Boolean
+}
+
+class "Payment" {
+    Amount : %Decimal {required, min=0}
+    PaymentDate : %Date
+    Method : %String
+    Processed : %Boolean
+    --
+    Process() : %Boolean
+    Refund() : %Boolean
+    MarkAsProcessedSQL()
+}
+
+Person <|-- Customer
+Person <|-- Employee
+
+Person *-- Address
+
+CarModel "1" o-- "0..*" Car
+
+Customer "1" -- "0..*" RentalContract : one - many
+Car "1" -- "0..*" RentalContract
+
+RentalContract "1" *-- "1..*" Payment : parent - children
+
+Employee --> Car
+
+@enduml

@@ -1,0 +1,87 @@
+@startuml
+hide empty methods
+hide circle
+
+!define table(x) class x
+!define primary_key(x) <u>x</u>
+
+skinparam classAttributeIconSize 0
+
+table(Address) {
+    PK_AddressID : INT
+    Street : VARCHAR
+    City : VARCHAR
+    ZipCode : VARCHAR
+}
+
+table(Person) {
+    PK_PersonID : INT
+    Name : VARCHAR
+    Email : VARCHAR
+    ContactMethods : TEXT
+    FK_AddressID : INT
+}
+
+table(Customer) {
+    PK_CustomerID : INT
+    DriverLicenseNumber : VARCHAR
+    LicenseScan : BLOB
+    FK_PersonID : INT
+}
+
+table(Employee) {
+    PK_EmployeeID : INT
+    Position : VARCHAR
+    HireDate : DATE
+    FK_PersonID : INT
+}
+
+table(CarModel) {
+    PK_ModelID : INT
+    Brand : VARCHAR
+    ModelName : VARCHAR
+    Year : INT
+    Features : TEXT
+}
+
+table(Car) {
+    PK_CarID : INT
+    Vin : VARCHAR
+    LicensePlate : VARCHAR
+    Status : VARCHAR
+    Mileage : INT
+    DailyRate : DECIMAL
+    Photo : BLOB
+    FK_ModelID : INT
+}
+
+table(RentalContract) {
+    PK_ContractID : INT
+    StartDate : DATE
+    EndDate : DATE
+    AgreementText : TEXT
+    Closed : BOOLEAN
+    FK_CustomerID : INT
+    FK_CarID : INT
+    RentalDays : INT
+    TotalPayment : DECIMAL
+}
+
+table(Payment) {
+    PK_PaymentID : INT
+    Amount : DECIMAL
+    PaymentDate : DATE
+    Method : VARCHAR
+    Processed : BOOLEAN
+    FK_RentalContractID : INT
+}
+
+Person ||--||  Address
+Customer ||--||  Person
+Employee ||--||  Person
+Car  }|--||  CarModel
+RentalContract  }|--||  Car
+RentalContract  }|--||  Customer
+Payment  }|--||  RentalContract
+
+@enduml

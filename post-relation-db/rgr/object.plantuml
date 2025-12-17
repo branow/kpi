@@ -1,0 +1,58 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+object customer1 <<Customer>> {
+    Name = "John Doe"
+    DriverLicenseNumber = "DL1234567"
+}
+
+object address1 <<Address>> {
+    Street = "Main St 10"
+    City = "Kyiv"
+    ZipCode = "01001"
+}
+
+object model1 <<CarModel>> {
+    Brand = "Toyota"
+    ModelName = "Corolla"
+    Year = 2022
+}
+
+object car1 <<Car>> {
+    Vin = "VIN123456789"
+    LicensePlate = "AA1234BB"
+    Status = "Available"
+    Mileage = 45000
+    DailyRate = 55
+}
+
+object contract1 <<RentalContract>> {
+    StartDate = 2025-03-01
+    EndDate = 2025-03-05
+    Closed = false
+    RentalDays = 5
+    TotalPayment = 220
+}
+
+object payment1 <<Payment>> {
+    Amount = 100
+    Method = "Card"
+    Processed = true
+}
+
+object payment2 <<Payment>> {
+    Amount = 120
+    Method = "Cash"
+    Processed = false
+}
+
+customer1 -- contract1
+customer1 -- address1
+
+contract1 -- car1
+contract1 -- payment1
+contract1 -- payment2
+
+car1 -- model1
+
+@enduml

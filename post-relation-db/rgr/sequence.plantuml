@@ -1,0 +1,37 @@
+@startuml
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+participant "Customer" as C
+participant "Car" as Car
+participant "RentalContract" as RC
+participant "Payment" as P
+participant "Bank" as Bank
+
+== Customer views available cars ==
+C -> Car : findAvailableCars(startDate, endDate)
+Car --> C : list of cars
+
+== Customer requests a rental ==
+C -> C : requestRental(selectedCar, startDate, endDate)
+activate C
+C -> RC : %New()
+activate RC
+C -> RC : set StartDate, EndDate, Car, Customer
+RC --> C : RentalContract
+deactivate RC
+deactivate C
+
+== Customer makes payments ==
+loop for each payment
+    C -> P : %New(amount)
+    P -> RC : addPayment()
+    P -> Bank : processPayment()
+    Bank --> P : processed = true
+end
+
+== RentalContract updates total ==
+RC -> RC : calculateTotal()
+RC -> RC : update TotalPayment
+
+@enduml
